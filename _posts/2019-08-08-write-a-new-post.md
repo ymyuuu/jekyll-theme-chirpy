@@ -1,93 +1,93 @@
 ---
-title: Writing a New Post
+title: 撰写新文章
 author: cotes
 date: 2019-08-08 14:10:00 +0800
-categories: [Blogging, Tutorial]
-tags: [writing]
+categories: [博客, 教程]
+tags: [写作]
 render_with_liquid: false
 ---
 
-This tutorial will guide you how to write a post in the _Chirpy_ template, and it's worth reading even if you've used Jekyll before, as many features require specific variables to be set.
+本教程将指导您如何在 _Chirpy_ 模板中撰写文章，即使您之前使用过 Jekyll，也值得一读，因为许多功能需要设置特定的变量。
 
-## Naming and Path
+## 文件命名和路径
 
-Create a new file named `YYYY-MM-DD-TITLE.EXTENSION`{: .filepath} and put it in the `_posts`{: .filepath} of the root directory. Please note that the `EXTENSION`{: .filepath} must be one of `md`{: .filepath} and `markdown`{: .filepath}. If you want to save time of creating files, please consider using the plugin [`Jekyll-Compose`](https://github.com/jekyll/jekyll-compose) to accomplish this.
+在项目根目录下的 `_posts`{: .filepath} 中创建一个名为 `YYYY-MM-DD-TITLE.EXTENSION`{: .filepath} 的新文件。请注意，`EXTENSION`{: .filepath} 必须是 `md`{: .filepath} 或 `markdown`{: .filepath} 之一。如果您希望节省创建文件的时间，请考虑使用插件 [`Jekyll-Compose`](https://github.com/jekyll/jekyll-compose) 来实现。
 
 ## Front Matter
 
-Basically, you need to fill the [Front Matter](https://jekyllrb.com/docs/front-matter/) as below at the top of the post:
+基本上，您需要在文章顶部填写如下 [Front Matter](https://jekyllrb.com/docs/front-matter/)：
 
 ```yaml
 ---
 title: TITLE
 date: YYYY-MM-DD HH:MM:SS +/-TTTT
-categories: [TOP_CATEGORIE, SUB_CATEGORIE]
-tags: [TAG]     # TAG names should always be lowercase
+categories: [主分类, 子分类]
+tags: [标签]     # 标签名称应始终为小写
 ---
 ```
 
-> The posts' _layout_ has been set to `post` by default, so there is no need to add the variable _layout_ in the Front Matter block.
+> 文章的 _layout_ 已默认设置为 `post`，因此无需在 Front Matter 块中添加 _layout_ 变量。
 {: .prompt-tip }
 
-### Timezone of Date
+### 日期的时区
 
-To accurately record the release date of a post, you should not only set up the `timezone` of `_config.yml`{: .filepath} but also provide the post's timezone in variable `date` of its Front Matter block. Format: `+/-TTTT`, e.g. `+0800`.
+为了准确记录文章发布时间，您不仅需要在 `_config.yml`{: .filepath} 中设置 `timezone`，还需要在文章 Front Matter 的 `date` 变量中提供文章的时区。格式为 `+/-TTTT`，例如 `+0800`。
 
-### Categories and Tags
+### 分类和标签
 
-The `categories` of each post are designed to contain up to two elements, and the number of elements in `tags` can be zero to infinity. For instance:
+每篇文章的 `categories` 设计为最多包含两个元素，而 `tags` 的元素个数可以为零或任意多个。例如：
 
 ```yaml
 ---
-categories: [Animal, Insect]
+categories: [动物, 昆虫]
 tags: [bee]
 ---
 ```
 
-### Author Information
+### 作者信息
 
-The author information of the post usually does not need to be filled in the _Front Matter_ , they will be obtained from variables `social.name` and the first entry of `social.links` of the configuration file by default. But you can also override it as follows:
+文章的作者信息通常不需要在 Front Matter 中填写，默认会从配置文件中的 `social.name` 和 `social.links` 的第一项获取。但您也可以按如下方式覆盖它：
 
-Adding author information in `_data/authors.yml` (If your website doesn't have this file, don't hesitate to create one).
+在 `_data/authors.yml` 中添加作者信息（如果您的网站还没有该文件，请随时创建一个）。
 
 ```yaml
 <author_id>:
-  name: <full name>
-  twitter: <twitter_of_author>
-  url: <homepage_of_author>
+  name: <全名>
+  twitter: <作者的twitter>
+  url: <作者的主页>
 ```
 {: file="_data/authors.yml" }
 
-And then use `author` to specify a single entry or `authors` to specify multiple entries:
+然后使用 `author` 指定单个条目或使用 `authors` 指定多个条目：
 
 ```yaml
 ---
-author: <author_id>                     # for single entry
-# or
-authors: [<author1_id>, <author2_id>]   # for multiple entries
+author: <author_id>                     # 单个条目
+# 或者
+authors: [<author1_id>, <author2_id>]     # 多个条目
 ---
 ```
 
-Having said that, the key `author` can also identify multiple entries.
+需要说明的是，键 `author` 也可以识别多个条目。
 
-> The benefit of reading the author information from the file `_data/authors.yml`{: .filepath } is that the page will have the meta tag `twitter:creator`, which enriches the [Twitter Cards](https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started#card-and-content-attribution) and is good for SEO.
+> 从文件 `_data/authors.yml`{: .filepath} 中读取作者信息的好处在于，页面会带有 `twitter:creator` 的 meta 标签，这丰富了 [Twitter Cards](https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started#card-and-content-attribution) 信息，对 SEO 有益。
 {: .prompt-info }
 
-### Post Description
+### 文章描述
 
-By default, the first words of the post are used to display on the home page for a list of posts, in the _Further Reading_ section, and in the XML of the RSS feed. If you don't want to display the auto-generated description for the post, you can customize it using the `description` field in the _Front Matter_ as follows:
+默认情况下，文章的前几句话会用于在主页文章列表、“更多阅读”部分以及 RSS 的 XML 中显示。如果您不希望显示自动生成的文章描述，可以通过在 Front Matter 中使用 `description` 字段自定义描述，如下：
 
 ```yaml
 ---
-description: Short summary of the post.
+description: 文章的简短摘要。
 ---
 ```
 
-Additionally, the `description` text will also be displayed under the post title on the post's page.
+另外，`description` 文本也会显示在文章页面的标题下方。
 
-## Table of Contents
+## 目录
 
-By default, the **T**able **o**f **C**ontents (TOC) is displayed on the right panel of the post. If you want to turn it off globally, go to `_config.yml`{: .filepath} and set the value of variable `toc` to `false`. If you want to turn off TOC for a specific post, add the following to the post's [Front Matter](https://jekyllrb.com/docs/front-matter/):
+默认情况下，文章右侧会显示 **T**able **o**f **C**ontents (TOC)。如果您想全局关闭目录，请前往 `_config.yml`{: .filepath} 并将变量 `toc` 的值设置为 `false`。如果只想对某篇文章关闭目录，在该文章的 [Front Matter](https://jekyllrb.com/docs/front-matter/) 中添加以下内容：
 
 ```yaml
 ---
@@ -95,11 +95,11 @@ toc: false
 ---
 ```
 
-## Comments
+## 评论
 
-The global setting for comments is defined by the `comments.provider` option in the `_config.yml`{: .filepath} file. Once a comment system is selected for this variable, comments will be enabled for all posts.
+评论的全局设置由 `_config.yml`{: .filepath} 文件中的 `comments.provider` 选项定义。一旦为此变量选择了评论系统，则所有文章的评论将被启用。
 
-If you want to close the comment for a specific post, add the following to the **Front Matter** of the post:
+如果您想对某篇文章关闭评论，在该文章的 **Front Matter** 中添加以下内容：
 
 ```yaml
 ---
@@ -107,22 +107,22 @@ comments: false
 ---
 ```
 
-## Media
+## 媒体
 
-We refer to images, audio and video as media resources in _Chirpy_.
+在 _Chirpy_ 中，我们将图片、音频和视频统称为媒体资源。
 
-### URL Prefix
+### URL 前缀
 
-From time to time we have to define duplicate URL prefixes for multiple resources in a post, which is a boring task that you can avoid by setting two parameters.
+有时我们需要为文章中的多个资源定义重复的 URL 前缀，这是一项繁琐的任务，可以通过设置两个参数来避免。
 
-- If you are using a CDN to host media files, you can specify the `cdn` in `_config.yml`{: .filepath }. The URLs of media resources for site avatar and posts are then prefixed with the CDN domain name.
+- 如果您使用 CDN 来托管媒体文件，可以在 `_config.yml`{: .filepath} 中指定 `cdn`。这样，站点头像和文章中媒体资源的 URL 将以 CDN 域名作为前缀。
 
   ```yaml
   cdn: https://cdn.com
   ```
   {: file='_config.yml' .nolineno }
 
-- To specify the resource path prefix for the current post/page range, set `media_subpath` in the _front matter_ of the post:
+- 若要为当前文章/页面的资源路径指定前缀，请在文章的 Front Matter 中设置 `media_subpath`：
 
   ```yaml
   ---
@@ -131,13 +131,13 @@ From time to time we have to define duplicate URL prefixes for multiple resource
   ```
   {: .nolineno }
 
-The option `site.cdn` and `page.media_subpath` can be used individually or in combination to flexibly compose the final resource URL: `[site.cdn/][page.media_subpath/]file.ext`
+选项 `site.cdn` 和 `page.media_subpath` 可以单独使用，也可以组合使用，以灵活构成最终的资源 URL：`[site.cdn/][page.media_subpath/]file.ext`
 
-### Images
+### 图片
 
-#### Caption
+#### 标题说明
 
-Add italics to the next line of an image, then it will become the caption and appear at the bottom of the image:
+在图片下一行添加斜体文本，便会成为图片标题，并显示在图片底部：
 
 ```markdown
 ![img-description](/path/to/image)
@@ -145,92 +145,92 @@ _Image Caption_
 ```
 {: .nolineno}
 
-#### Size
+#### 大小
 
-To prevent the page content layout from shifting when the image is loaded, we should set the width and height for each image.
+为防止加载图片时页面内容布局发生位移，应为每张图片设置宽度和高度。
 
 ```markdown
 ![Desktop View](/assets/img/sample/mockup.png){: width="700" height="400" }
 ```
 {: .nolineno}
 
-> For an SVG, you have to at least specify its _width_, otherwise it won't be rendered.
+> 对于 SVG 图像，至少需要指定其 _width_，否则不会被渲染。
 {: .prompt-info }
 
-Starting from _Chirpy v5.0.0_, `height` and `width` support abbreviations (`height` → `h`, `width` → `w`). The following example has the same effect as the above:
+从 _Chirpy v5.0.0_ 开始，`height` 和 `width` 支持缩写（`height` → `h`，`width` → `w`）。以下示例与上例效果相同：
 
 ```markdown
 ![Desktop View](/assets/img/sample/mockup.png){: w="700" h="400" }
 ```
 {: .nolineno}
 
-#### Position
+#### 位置
 
-By default, the image is centered, but you can specify the position by using one of the classes `normal`, `left`, and `right`.
+默认情况下，图片居中显示，但您可以使用 `normal`、`left` 和 `right` 类来指定图片位置。
 
-> Once the position is specified, the image caption should not be added.
+> 一旦指定了位置，就不应再添加图片标题。
 {: .prompt-warning }
 
-- **Normal position**
+- **正常位置**
 
-  Image will be left aligned in below sample:
+  以下示例中图片将左对齐：
 
   ```markdown
   ![Desktop View](/assets/img/sample/mockup.png){: .normal }
   ```
   {: .nolineno}
 
-- **Float to the left**
+- **向左浮动**
 
   ```markdown
   ![Desktop View](/assets/img/sample/mockup.png){: .left }
   ```
   {: .nolineno}
 
-- **Float to the right**
+- **向右浮动**
 
   ```markdown
   ![Desktop View](/assets/img/sample/mockup.png){: .right }
   ```
   {: .nolineno}
 
-#### Dark/Light mode
+#### 暗/亮模式
 
-You can make images follow theme preferences in dark/light mode. This requires you to prepare two images, one for dark mode and one for light mode, and then assign them a specific class (`dark` or `light`):
+您可以使图片根据主题的暗/亮模式切换显示。这需要您准备两张图片，一张用于暗模式，一张用于亮模式，然后分别为它们指定特定的类（`dark` 或 `light`）：
 
 ```markdown
-![Light mode only](/path/to/light-mode.png){: .light }
-![Dark mode only](/path/to/dark-mode.png){: .dark }
+![仅亮模式](/path/to/light-mode.png){: .light }
+![仅暗模式](/path/to/dark-mode.png){: .dark }
 ```
 
-#### Shadow
+#### 阴影效果
 
-The screenshots of the program window can be considered to show the shadow effect:
+程序窗口的截屏可以通过添加阴影效果来显示：
 
 ```markdown
 ![Desktop View](/assets/img/sample/mockup.png){: .shadow }
 ```
 {: .nolineno}
 
-#### Preview Image
+#### 预览图片
 
-If you want to add an image at the top of the post, please provide an image with a resolution of `1200 x 630`. Please note that if the image aspect ratio does not meet `1.91 : 1`, the image will be scaled and cropped.
+如果您想在文章顶部添加一张图片，请提供分辨率为 `1200 x 630` 的图片。请注意，如果图片的宽高比不符合 `1.91 : 1`，图片将被缩放和裁剪。
 
-Knowing these prerequisites, you can start setting the image's attribute:
+了解上述前提后，您可以开始设置图片的属性：
 
 ```yaml
 ---
 image:
   path: /path/to/image
-  alt: image alternative text
+  alt: 图片替代文本
 ---
 ```
 
-Note that the [`media_subpath`](#url-prefix) can also be passed to the preview image, that is, when it has been set, the attribute `path` only needs the image file name.
+请注意，[`media_subpath`](#url-前缀) 同样可以传递给预览图片，也就是说，当它已被设置时，属性 `path` 只需要图片文件名。
 
-For simple use, you can also just use `image` to define the path.
+简单使用时，您也可以直接使用 `image` 来定义路径。
 
-```yml
+```yaml
 ---
 image: /path/to/image
 ---
@@ -238,64 +238,64 @@ image: /path/to/image
 
 #### LQIP
 
-For preview images:
+对于预览图片：
 
 ```yaml
 ---
 image:
-  lqip: /path/to/lqip-file # or base64 URI
+  lqip: /path/to/lqip-file # 或者 base64 URI
 ---
 ```
 
-> You can observe LQIP in the preview image of post \"[Text and Typography](../text-and-typography/)\".
-
-For normal images:
+> 您可以在文章 “[文本与排版](../text-and-typography/)” 的预览图片中观察到 LQIP 效果。
+  
+对于普通图片：
 
 ```markdown
-![Image description](/path/to/image){: lqip="/path/to/lqip-file" }
+![图片描述](/path/to/image){: lqip="/path/to/lqip-file" }
 ```
 {: .nolineno }
 
-### Video
+### 视频
 
-#### Social Media Platform
+#### 社交媒体平台
 
-You can embed videos from social media platforms with the following syntax:
+您可以使用以下语法嵌入来自社交媒体平台的视频：
 
 ```liquid
 {% include embed/{Platform}.html id='{ID}' %}
 ```
 
-Where `Platform` is the lowercase of the platform name, and `ID` is the video ID.
+其中 `Platform` 为平台名称的小写，`ID` 为视频 ID。
 
-The following table shows how to get the two parameters we need in a given video URL, and you can also know the currently supported video platforms.
+下表展示了如何从给定视频 URL 中获取这两个参数，同时您也可以了解当前支持的视频平台。
 
-| Video URL                                                                                          | Platform   | ID             |
+| 视频 URL                                                                                           | 平台       | ID             |
 | -------------------------------------------------------------------------------------------------- | ---------- | :------------- |
 | [https://www.**youtube**.com/watch?v=**H-B46URT4mg**](https://www.youtube.com/watch?v=H-B46URT4mg) | `youtube`  | `H-B46URT4mg`  |
 | [https://www.**twitch**.tv/videos/**1634779211**](https://www.twitch.tv/videos/1634779211)         | `twitch`   | `1634779211`   |
 | [https://www.**bilibili**.com/video/**BV1Q44y1B7Wf**](https://www.bilibili.com/video/BV1Q44y1B7Wf) | `bilibili` | `BV1Q44y1B7Wf` |
 
-#### Video Files
+#### 视频文件
 
-If you want to embed a video file directly, use the following syntax:
+如果您想直接嵌入视频文件，请使用以下语法：
 
 ```liquid
 {% include embed/video.html src='{URL}' %}
 ```
 
-Where `URL` is a URL to a video file e.g. `/path/to/sample/video.mp4`.
+其中 `URL` 是指向视频文件的 URL，例如 `/path/to/sample/video.mp4`。
 
-You can also specify additional attributes for the embedded video file. Here is a full list of attributes allowed.
+您还可以为嵌入的视频文件指定其他属性。以下是允许的所有属性列表。
 
-- `poster='/path/to/poster.png'` — poster image for a video that is shown while video is downloading
-- `title='Text'` — title for a video that appears below the video and looks same as for images
-- `autoplay=true` — video automatically begins to play back as soon as it can
-- `loop=true` — automatically seek back to the start upon reaching the end of the video
-- `muted=true` — audio will be initially silenced
-- `types` — specify the extensions of additional video formats separated by `|`. Ensure these files exist in the same directory as your primary video file.
+- `poster='/path/to/poster.png'` — 视频下载时显示的封面图片
+- `title='文本'` — 显示在视频下方的标题，与图片效果相同
+- `autoplay=true` — 视频一旦加载完成自动开始播放
+- `loop=true` — 播放结束后自动返回视频开头
+- `muted=true` — 音频初始静音
+- `types` — 指定额外视频格式的扩展名，多个格式之间用 `|` 分隔。确保这些文件与主视频文件位于同一目录下。
 
-Consider an example using all of the above:
+下面是一个包含所有上述属性的示例：
 
 ```liquid
 {%
@@ -303,42 +303,42 @@ Consider an example using all of the above:
   src='/path/to/video.mp4'
   types='ogg|mov'
   poster='poster.png'
-  title='Demo video'
+  title='演示视频'
   autoplay=true
   loop=true
   muted=true
 %}
 ```
 
-### Audios
+### 音频
 
-If you want to embed an audio file directly, use the following syntax:
+如果您想直接嵌入音频文件，请使用以下语法：
 
 ```liquid
 {% include embed/audio.html src='{URL}' %}
 ```
 
-Where `URL` is a URL to an audio file e.g. `/path/to/audio.mp3`.
+其中 `URL` 是指向音频文件的 URL，例如 `/path/to/audio.mp3`。
 
-You can also specify additional attributes for the embedded audio file. Here is a full list of attributes allowed.
+您还可以为嵌入的音频文件指定其他属性。以下是允许的所有属性列表。
 
-- `title='Text'` — title for an audio that appears below the audio and looks same as for images
-- `types` — specify the extensions of additional audio formats separated by `|`. Ensure these files exist in the same directory as your primary audio file.
+- `title='文本'` — 显示在音频下方的标题，与图片效果相同
+- `types` — 指定额外音频格式的扩展名，多个格式之间用 `|` 分隔。确保这些文件与主音频文件位于同一目录下。
 
-Consider an example using all of the above:
+下面是一个包含所有上述属性的示例：
 
 ```liquid
 {%
   include embed/audio.html
   src='/path/to/audio.mp3'
   types='ogg|wav|aac'
-  title='Demo audio'
+  title='演示音频'
 %}
 ```
 
-## Pinned Posts
+## 置顶文章
 
-You can pin one or more posts to the top of the home page, and the fixed posts are sorted in reverse order according to their release date. Enable by:
+您可以将一篇或多篇文章置顶显示在主页顶部，置顶文章会按照发布时间的倒序排列。启用方法如下：
 
 ```yaml
 ---
@@ -346,45 +346,45 @@ pin: true
 ---
 ```
 
-## Prompts
+## 提示
 
-There are several types of prompts: `tip`, `info`, `warning`, and `danger`. They can be generated by adding the class `prompt-{type}` to the blockquote. For example, define a prompt of type `info` as follows:
+提示分为几种类型：`tip`、`info`、`warning` 和 `danger`。只需为引用块添加类 `prompt-{type}` 即可生成对应类型的提示。例如，定义一个 `info` 类型的提示如下：
 
 ```md
-> Example line for prompt.
+> 示例提示内容。
 {: .prompt-info }
 ```
 {: .nolineno }
 
-## Syntax
+## 语法
 
-### Inline Code
+### 行内代码
 
 ```md
-`inline code part`
+`内联代码部分`
 ```
 {: .nolineno }
 
-### Filepath Highlight
+### 文件路径高亮
 
 ```md
 `/path/to/a/file.extend`{: .filepath}
 ```
 {: .nolineno }
 
-### Code Block
+### 代码块
 
-Markdown symbols ```` ``` ```` can easily create a code block as follows:
+Markdown 语法 ```` ``` ```` 可轻松创建代码块，如下所示：
 
 ````md
 ```
-This is a plaintext code snippet.
+这是一个纯文本代码片段。
 ```
 ````
 
-#### Specifying Language
+#### 指定语言
 
-Using ```` ```{language} ```` you will get a code block with syntax highlight:
+使用 ```` ```{language} ```` 将获得具有语法高亮的代码块：
 
 ````markdown
 ```yaml
@@ -392,50 +392,50 @@ key: value
 ```
 ````
 
-> The Jekyll tag `{% highlight %}` is not compatible with this theme.
+> Jekyll 标签 `{% highlight %}` 与本主题不兼容。
 {: .prompt-danger }
 
-#### Line Number
+#### 行号
 
-By default, all languages except `plaintext`, `console`, and `terminal` will display line numbers. When you want to hide the line number of a code block, add the class `nolineno` to it:
+默认情况下，除 `plaintext`、`console` 和 `terminal` 之外的所有语言都会显示行号。当您想隐藏代码块的行号时，可以为其添加 `nolineno` 类：
 
 ````markdown
 ```shell
-echo 'No more line numbers!'
+echo '不再显示行号！'
 ```
 {: .nolineno }
 ````
 
-#### Specifying the Filename
+#### 指定文件名
 
-You may have noticed that the code language will be displayed at the top of the code block. If you want to replace it with the file name, you can add the attribute `file` to achieve this:
+您可能已经注意到，代码块顶部会显示代码语言。如果您想用文件名替换它，可以添加 `file` 属性来实现：
 
 ````markdown
 ```shell
-# content
+# 内容
 ```
 {: file="path/to/file" }
 ````
 
-#### Liquid Codes
+#### Liquid 代码
 
-If you want to display the **Liquid** snippet, surround the liquid code with `{% raw %}` and `{% endraw %}`:
+如果您想展示 **Liquid** 代码片段，请用 `{% raw %}` 和 `{% endraw %}` 包裹 Liquid 代码：
 
 ````markdown
 {% raw %}
 ```liquid
 {% if product.title contains 'Pack' %}
-  This product's title contains the word Pack.
+  该产品标题中包含 "Pack" 一词。
 {% endif %}
 ```
 {% endraw %}
 ````
 
-Or adding `render_with_liquid: false` (Requires Jekyll 4.0 or higher) to the post's YAML block.
+或者在文章的 YAML 块中添加 `render_with_liquid: false`（需要 Jekyll 4.0 或更高版本）。
 
-## Mathematics
+## 数学公式
 
-We use [**MathJax**][mathjax] to generate mathematics. For website performance reasons, the mathematical feature won't be loaded by default. But it can be enabled by:
+我们使用 [**MathJax**][mathjax] 来渲染数学公式。出于网站性能考虑，数学功能默认不加载，但可以通过以下方式启用：
 
 [mathjax]: https://www.mathjax.org/
 
@@ -445,22 +445,22 @@ math: true
 ---
 ```
 
-After enabling the mathematical feature, you can add math equations with the following syntax:
+启用数学功能后，您可以使用以下语法添加数学公式：
 
-- **Block math** should be added with `$$ math $$` with **mandatory** blank lines before and after `$$`
-  - **Inserting equation numbering** should be added with `$$\begin{equation} math \end{equation}$$`
-  - **Referencing equation numbering** should be done with `\label{eq:label_name}` in the equation block and `\eqref{eq:label_name}` inline with text (see example below)
-- **Inline math** (in lines) should be added with `$$ math $$` without any blank line before or after `$$`
-- **Inline math** (in lists) should be added with `\$$ math $$`
+- **块级公式** 应该用 `$$ math $$` 包裹，并且 `$$` 前后必须有空行  
+  - **插入公式编号** 可用 `$$\begin{equation} math \end{equation}$$`  
+  - **引用公式编号** 应在公式块中使用 `\label{eq:label_name}`，在正文中使用 `\eqref{eq:label_name}`（见下例）
+- **行内公式**（在文本行内）应使用 `$$ math $$`，且前后不需要空行
+- **行内公式**（在列表中）应使用 `\$$ math $$`
 
 ```markdown
-<!-- Block math, keep all blank lines -->
+<!-- 块级公式，请确保前后有空行 -->
 
 $$
 LaTeX_math_expression
 $$
 
-<!-- Equation numbering, keep all blank lines  -->
+<!-- 带公式编号的块级公式，请确保前后有空行  -->
 
 $$
 \begin{equation}
@@ -469,28 +469,28 @@ $$
 \end{equation}
 $$
 
-Can be referenced as \eqref{eq:label_name}.
+可以通过 \eqref{eq:label_name} 来引用。
 
-<!-- Inline math in lines, NO blank lines -->
+<!-- 行内公式，行内使用，无空行 -->
 
 "Lorem ipsum dolor sit amet, $$ LaTeX_math_expression $$ consectetur adipiscing elit."
 
-<!-- Inline math in lists, escape the first `$` -->
+<!-- 列表中的行内公式，首个 `$` 需要转义 -->
 
 1. \$$ LaTeX_math_expression $$
 2. \$$ LaTeX_math_expression $$
 3. \$$ LaTeX_math_expression $$
 ```
 
-> Starting with `v7.0.0`, configuration options for **MathJax** have been moved to file `assets/js/data/mathjax.js`{: .filepath }, and you can change the options as needed, such as adding [extensions][mathjax-exts].  
-> If you are building the site via `chirpy-starter`, copy that file from the gem installation directory (check with command `bundle info --path jekyll-theme-chirpy`) to the same directory in your repository.
+> 从 `v7.0.0` 开始，**MathJax** 的配置选项已移至文件 `assets/js/data/mathjax.js`{: .filepath}，您可以根据需要更改选项，例如添加 [extensions][mathjax-exts]。  
+> 如果您是通过 `chirpy-starter` 构建站点，请将该文件从 gem 安装目录（可通过命令 `bundle info --path jekyll-theme-chirpy` 检查）复制到您仓库的相同目录下。
 {: .prompt-tip }
 
 [mathjax-exts]: https://docs.mathjax.org/en/latest/input/tex/extensions/index.html
 
 ## Mermaid
 
-[**Mermaid**](https://github.com/mermaid-js/mermaid) is a great diagram generation tool. To enable it on your post, add the following to the YAML block:
+[**Mermaid**](https://github.com/mermaid-js/mermaid) 是一个出色的图表生成工具。要在文章中启用它，请在 YAML 块中添加以下内容：
 
 ```yaml
 ---
@@ -498,8 +498,8 @@ mermaid: true
 ---
 ```
 
-Then you can use it like other markdown languages: surround the graph code with ```` ```mermaid ```` and ```` ``` ````.
+然后，您可以像其他 Markdown 语言一样使用它：用 ```` ```mermaid ```` 和 ```` ``` ```` 包裹图表代码。
 
-## Learn More
+## 了解更多
 
-For more knowledge about Jekyll posts, visit the [Jekyll Docs: Posts](https://jekyllrb.com/docs/posts/).
+有关 Jekyll 文章的更多知识，请访问 [Jekyll Docs: Posts](https://jekyllrb.com/docs/posts/)。
