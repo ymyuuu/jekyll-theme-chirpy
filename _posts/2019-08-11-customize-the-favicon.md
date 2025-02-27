@@ -6,24 +6,24 @@ categories: [Blogging, Tutorial]
 tags: [favicon]
 ---
 
-The [favicons](https://www.favicon-generator.org/about/) of [**Chirpy**](https://github.com/cotes2020/jekyll-theme-chirpy/) are placed in the directory `assets/img/favicons/`{: .filepath}. You may want to replace them with your own. The following sections will guide you to create and replace the default favicons.
+  [favicons](https://www.favicon-generator.org/about/) of [**Chirpy**](https://github.com/cotes2020/jekyll-theme-chirpy/) 被放置在目录 `assets/img/favicons/`{: .filepath} 中。你可能希望用你自己的图标替换它们。以下各部分将指导你创建并替换默认的 favicon。
 
-## Generate the favicon
+## 生成 favicon
 
-Prepare a square image (PNG, JPG, or SVG) with a size of 512x512 or more, and then go to the online tool [**Real Favicon Generator**](https://realfavicongenerator.net/) and click the button <kbd>Select your Favicon image</kbd> to upload your image file.
+准备一张尺寸为 512x512 或更大、且为正方形的图片（PNG、JPG 或 SVG 格式），和然后前往在线工具 [**Real Favicon Generator**](https://realfavicongenerator.net/)，点击按钮 <kbd>Select your Favicon image</kbd> 上传你的图片文件。
 
-In the next step, the webpage will show all usage scenarios. You can keep the default options, scroll to the bottom of the page, and click the button <kbd>Generate your Favicons and HTML code</kbd> to generate the favicon.
+在下一步中，网页将显示所有使用场景。你可以保留默认选项，滚动至页面底部，和点击按钮 <kbd>Generate your Favicons and HTML code</kbd> 来生成 favicon。
 
-## Download & Replace
+## 下载 & 替换
 
-Download the generated package, unzip and delete the following two from the extracted files:
+下载生成的压缩包，解压后删除以下两个文件：
 
 - `browserconfig.xml`{: .filepath}
 - `site.webmanifest`{: .filepath}
 
-And then copy the remaining image files (`.PNG`{: .filepath} and `.ICO`{: .filepath}) to cover the original files in the directory `assets/img/favicons/`{: .filepath} of your Jekyll site. If your Jekyll site doesn't have this directory yet, just create one.
+然后将剩余的图片文件（`.PNG`{: .filepath} 和 `.ICO`{: .filepath}）复制过去，覆盖你 Jekyll 站点中目录 `assets/img/favicons/`{: .filepath} 下的原有文件。如果你的 Jekyll 站点还没有该目录，请直接新建一个。
 
-The following table will help you understand the changes to the favicon files:
+下表将帮助你理解 favicon 文件的变化：
 
 | File(s)             | From Online Tool                  | From Chirpy |
 |---------------------|:---------------------------------:|:-----------:|
@@ -31,7 +31,7 @@ The following table will help you understand the changes to the favicon files:
 | `*.ICO`             | ✓                                 | ✗           |
 
 <!-- markdownlint-disable-next-line -->
->  ✓ means keep, ✗ means delete.
+>  ✓ 表示保留，✗ 表示删除。
 {: .prompt-info }
 
-The next time you build the site, the favicon will be replaced with a customized edition.
+下次构建站点时，favicon 将被替换为定制版。
